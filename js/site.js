@@ -228,6 +228,11 @@
         var btn = f.querySelector('button[type="submit"]');
         if (btn) btn.disabled = true;
         if (s) s.textContent = "Sending\u2026";
+        if (!f.action || f.action.indexOf("REPLACE_WITH_FORMSPREE_ID") !== -1 || f.getAttribute("action") === "#") {
+          if (s) s.textContent = "Contact form is not active yet. Please contact SCCC directly.";
+          if (btn) btn.disabled = false;
+          return;
+        }
         fetch(f.action, { method: "POST", body: new FormData(f), headers: { Accept: "application/json" } })
           .then(function(res){
             if (res.ok) {

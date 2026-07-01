@@ -243,8 +243,9 @@ def build_static_pages():
             doggear_slugs = [p["slug"] for p in PRODUCTS if p["category"] == "dog-gear"]
             content = content.replace("{{PRODUCT_GRID_DOGGEAR}}", product_grid(doggear_slugs, "", show_meta=True))
         if content_file == "contact.html":
-            action = f"https://formspree.io/f/{site['formspree_id']}"
-            content = content.replace("{{FORMSPREE_ACTION}}", action)
+            formspree_id = site.get("formspree_id", "").strip()
+            action = "#" if (not formspree_id or formspree_id == "REPLACE_WITH_FORMSPREE_ID") else f"https://formspree.io/f/{formspree_id}"
+            content = content.replace("FORMSPREE_ACTION", action)
         html = render_shell(page_key, content, root="", **opts)
         (ROOT_DIR / content_file).write_text(html)
         print(f"  wrote {content_file}")

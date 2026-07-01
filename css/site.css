@@ -254,3 +254,26 @@ html:not(.js) .reveal-line>*{transform:none}
   .reveal-line>*{transform:none}
   .hero__img{transform:none!important}
 }
+
+
+/* =========================================================
+   SCCC — Production layout repair
+   Stabilizes WebGL, nav, product cards, PDP and mobile stacking.
+   ========================================================= */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{min-width:320px}
+main{position:relative;z-index:1;overflow:hidden}
+section{position:relative;isolation:isolate}
+img,picture,video,canvas,svg{max-width:100%}
+canvas{display:block}.loader__mark{display:grid;place-items:center;line-height:1}.loader__mark img{width:auto;height:clamp(76px,14vw,150px);object-fit:contain}
+.nav{height:auto;min-height:72px;pointer-events:none}.nav__in{pointer-events:auto;min-height:var(--nav-h,84px);gap:24px}.nav__brand{flex:0 0 auto;min-width:0;line-height:1}.nav__brand img{width:auto;max-width:min(220px,48vw);height:28px;object-fit:contain}.nav.scrolled .nav__brand img{height:24px}.nav__links{min-width:0;align-items:center}.nav__links a,.nav__bag{white-space:nowrap}.nav__right{flex:0 0 auto}.menu{overflow-y:auto}.menu.open{z-index:560}.menu__mark{width:auto;max-width:180px;height:42px;object-fit:contain}
+.hero{min-height:720px;height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--black)}.hero__canvas,#world,.hero__img{position:absolute;inset:0;z-index:0;pointer-events:none}.hero__canvas canvas,#world canvas{width:100%!important;height:100%!important}.hero::after{z-index:1;pointer-events:none}.hero__in{position:relative;z-index:2;width:100%;padding-top:calc(var(--nav-h,84px) + 48px)}.hero__title,.h-hero{max-width:11ch;overflow-wrap:normal;word-break:normal;text-wrap:balance}.hero__title span{display:block;overflow:visible}.h-hero{font-size:clamp(54px,13vw,190px);line-height:.86;letter-spacing:-.025em}.hero__sub{max-width:46rem}.hero__scroll{pointer-events:none}
+.hero .btn,.sec .btn,.foot .btn,.pdp .btn{flex-shrink:0}.sec{overflow:hidden}.sec__head,.sec__head>*{min-width:0}.grid{align-items:start}.card{min-width:0;overflow:hidden}.card__media{width:100%;min-height:0;isolation:isolate}.card__media picture,.card__media img{width:100%;height:100%;display:block}.card__media img{object-fit:cover}.card__tag{max-width:calc(100% - 28px);white-space:nowrap}.card__cta{line-height:1.1}@media(hover:none){.card__cta{transform:translateY(0)}}.card__row{min-width:0;display:grid;grid-template-columns:minmax(0,1fr) auto}.card__name{min-width:0;overflow-wrap:anywhere;line-height:1.25}.card__price{white-space:nowrap}.card__meta{max-width:42ch;line-height:1.45}
+.pdp{padding-top:calc(var(--nav-h,84px) + 56px);overflow:hidden}.pdp__grid{align-items:start}.pdp__gallery,.pdp__info{min-width:0}.pdp__gallery img{display:block;width:100%;object-fit:cover}.pdp__info{position:relative;z-index:2}.pdp__desc,.acc p{max-width:60ch}button:disabled,.btn:disabled{opacity:.55;cursor:not-allowed}.foot{overflow:hidden}.foot__grid,.foot__cols,.foot__bottom{min-width:0}.foot__brand .nav__brand{display:inline-flex;max-width:100%}.foot__brand .nav__brand img{width:auto;max-width:min(280px,72vw);height:44px;object-fit:contain}
+@media(max-width:999px){.nav__bag{display:none}.hero{min-height:680px}.hero__in{padding-bottom:clamp(52px,10vw,90px)}.h-hero{font-size:clamp(56px,16vw,124px);line-height:.88}.hero__title,.h-hero{max-width:9ch}.story__panel{min-height:760px}}
+@media(max-width:640px){:root{--gutter:20px}.nav__in{min-height:72px}.nav__brand img{max-width:160px;height:24px}.burger{margin-right:-8px}.menu{padding-top:96px;justify-content:flex-start}.menu a{font-size:clamp(42px,15vw,68px);line-height:.95}.hero{min-height:640px;height:auto}.hero__in{padding-top:118px;padding-bottom:72px}.h-hero{font-size:clamp(52px,18vw,86px);line-height:.89;letter-spacing:-.02em}.hero__sub{font-size:15px;line-height:1.55;max-width:32ch}.hero__scroll{display:none}.btn{width:100%;justify-content:center;padding-inline:22px}.sec{padding:clamp(72px,18vw,110px) 0}.sec__head{gap:18px}.grid{gap:34px}.card__row{grid-template-columns:1fr;gap:4px}.card__price{white-space:normal}.story__panel{min-height:660px}.pdp{padding-top:104px}.pdp__grid{gap:30px}.sizes{gap:8px}.size{min-width:48px;padding:11px 12px}.foot__cols{grid-template-columns:1fr}.foot__bottom{display:grid;gap:8px}}
+
+/* PDP top spacing refinement */
+.pdp__crumb{display:block;margin-bottom:18px;position:relative;z-index:3}
+@media(min-width:1000px){.pdp{padding-top:calc(var(--nav-h,84px) + 78px)}.pdp__info{padding-top:12px}}
+@media(max-width:999px){.pdp__crumb{margin-top:10px}}
