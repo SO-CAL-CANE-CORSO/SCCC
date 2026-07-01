@@ -23,6 +23,7 @@
     var loader = doc.querySelector(".loader");
     if (!loader) { start(); return; }
     doc.body.classList.add("loading");
+    window.setTimeout(function(){ if (doc.body.classList.contains("loading")) { doc.body.classList.remove("loading"); if (loader) loader.style.display = "none"; start(); } }, 2400);
     var bar = loader.querySelector(".loader__bar");
     var num = loader.querySelector(".loader__num");
     var p = { v: 0 };
@@ -37,7 +38,7 @@
       gsap.to(p, { v: 100, duration: 1.6, ease: "power2.inOut",
         onUpdate: function(){ if(bar) bar.style.width = p.v + "%"; if(num) num.textContent = String(Math.round(p.v)).padStart(3,"0"); },
         onComplete: done });
-      gsap.from(".loader__mark", { yPercent: 120, duration: 1.1, ease: "expo.out" });
+      gsap.from(".loader__sig", { y: 18, opacity: 0, duration: .8, ease: "expo.out" });
     } else { if(bar) bar.style.width="100%"; setTimeout(done, 250); }
   }
 
@@ -247,6 +248,22 @@
           })
           .catch(function(){ if (s) s.textContent = "Network error \u2014 please try again or email us directly."; })
           .finally(function(){ if (btn) btn.disabled = false; });
+      });
+    });
+  }
+
+
+  /* ---------- Image reliability ---------- */
+  function initImageFallbacks() {
+    doc.querySelectorAll('img').forEach(function(img){
+      img.addEventListener('error', function(){
+        if (img.dataset.fallbackApplied) return;
+        img.dataset.fallbackApplied = '1';
+        var src = img.getAttribute('src') || '';
+        if (src.indexOf('.webp') !== -1) img.src = src.replace('.webp', '.jpg');
+        else if (src.indexOf('-800.jpg') !== -1) img.src = src.replace('-800.jpg', '.jpg');
+        else if (src.indexOf('-480.jpg') !== -1) img.src = src.replace('-480.jpg', '.jpg');
+        else if (src.indexOf('-1300.jpg') !== -1) img.src = src.replace('-1300.jpg', '.jpg');
       });
     });
   }

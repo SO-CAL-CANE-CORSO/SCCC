@@ -315,3 +315,20 @@ body{min-width:320px}main{position:relative;z-index:1;overflow:hidden}img,pictur
 .loader__rule{display:block;width:clamp(34px,6vw,86px);height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.68}
 @media(max-width:640px){.loader__sig{grid-template-columns:1fr;gap:12px}.loader__rule{width:72px}.loader__wordmark{height:24px!important}.loader__mascot{height:70px!important}}
 
+/* =========================================================
+   SCCC — reliability / no-blank-content patch
+   Content must never depend on CDN scripts, page transitions,
+   hover states, or reloads to become visible.
+   ========================================================= */
+.reveal{opacity:1!important;transform:none!important}
+.reveal-line{overflow:visible!important}
+.reveal-line>*{transform:none!important;opacity:1!important}
+.card,.look__item,.split__media,.split__body,.story__content,.hero__in{opacity:1!important;visibility:visible!important}
+.card__media{background:linear-gradient(135deg,#111,#1b1a17)}
+.card__media img,.pdp__gallery img,.look__item img,.split__media img{opacity:1;visibility:visible;background:#111;transition:transform .75s var(--ease),filter .45s var(--ease)}
+.pt{display:none!important}
+body.loading{overflow:auto!important}
+.loader{transition:opacity .45s var(--ease),visibility .45s var(--ease)}
+body:not(.loading) .loader{opacity:0;visibility:hidden;pointer-events:none}
+@media(max-width:720px){.nav{background:rgba(5,5,5,.82);backdrop-filter:blur(14px)}.nav__in{gap:12px}.hero__in{padding-inline:22px}}
+

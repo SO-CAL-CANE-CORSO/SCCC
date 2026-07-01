@@ -147,6 +147,7 @@ def render_shell(page_key, content_html, root="", include_three=False,
     html = html.replace("{{CONTENT}}", content_html)
     html = html.replace("{{FOOTER}}", footer_html(root, with_cta=with_footer_cta))
     html = html.replace("{{SCRIPTS}}", scripts_html(root, include_three=include_three, include_world=include_world))
+    html = html.replace("ROOT", root)
     return html
 
 
@@ -171,7 +172,7 @@ def card_html(p, root, show_meta=False):
             f'<div class="card__media">{tag}<picture>'
             f'<source type="image/webp" srcset="{webp_srcset}" sizes="{CARD_SIZES}">'
             f'<img src="{base}-800.jpg" srcset="{jpg_srcset}" sizes="{CARD_SIZES}" '
-            f'alt="{p["name"]}" loading="lazy" decoding="async" width="{w}" height="{h}">'
+            f'alt="{p["name"]}" loading="eager" decoding="async" fetchpriority="auto" data-fallback="{base}.jpg" width="{w}" height="{h}">'
             f'</picture><span class="card__cta">View product</span></div>'
             f'<div class="card__row"><span class="card__name">{p["name"]}</span><span class="card__price">${p["price"]}</span></div>{meta}</a>')
 
@@ -305,9 +306,25 @@ def build_robots_sitemap():
     print("  wrote sitemap.xml, robots.txt")
 
 
+
+def cleanup_generated_placeholders():
+    root_files = ["index.html", "shop.html", "lookbook.html", "about.html", "contact.html"]
+    product_files = [str(p) for p in (ROOT_DIR / "product").glob("*.html")]
+    root_token = "{" + "{38}" + "}"
+    for rel in root_files:
+        f = ROOT_DIR / rel
+        if f.exists():
+            txt = f.read_text().replace(root_token, "").replace("ROOT", "")
+            f.write_text(txt)
+    for file_path in product_files:
+        f = Path(file_path)
+        txt = f.read_text().replace(root_token, "../").replace("ROOT", "../")
+        f.write_text(txt)
+
 if __name__ == "__main__":
     print("Building SCCC site...")
     build_static_pages()
     build_product_pages()
     build_robots_sitemap()
+    cleanup_generated_placeholders()
     print("Done.")
