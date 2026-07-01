@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://sccc-socal.vercel.app/sitemap.xml
