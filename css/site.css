@@ -36,6 +36,13 @@ img{display:block;max-width:100%;height:auto}
 
 .brand-mark{height:40px;width:auto;display:block}
 .gothic{font-family:var(--gothic);font-weight:400}
+
+/* ===== brand logo kit (gold) ===== */
+.nav__brand img{height:26px;width:auto;display:block}
+.nav.scrolled .nav__brand img{height:23px}
+.foot__brand .nav__brand img{height:42px}
+.loader__mark img{height:clamp(84px,17vw,170px);width:auto;display:block}
+.menu__mark{height:40px;width:auto;display:block;margin-bottom:28px}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 section{position:relative}

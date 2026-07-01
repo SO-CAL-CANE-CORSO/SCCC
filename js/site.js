@@ -144,6 +144,7 @@
   function initWebGL() {
     var mount = doc.querySelector(".hero__canvas");
     if (!mount || !window.THREE || reduce) return;
+    if (doc.getElementById("world")) return; // world.js owns this page's hero canvas
     var w = mount.clientWidth, h = mount.clientHeight;
     var renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));

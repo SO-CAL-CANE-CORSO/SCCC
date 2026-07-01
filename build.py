@@ -47,8 +47,11 @@ def image_size(rel_path):
     if not HAS_PIL:
         return (1300, 907)
     p = ROOT_DIR / rel_path
-    with Image.open(p) as im:
-        return im.size
+    try:
+        with Image.open(p) as im:
+            return im.size
+    except (FileNotFoundError, OSError):
+        return (1300, 1625)
 
 
 # ---------- shared markup builders ----------
@@ -59,7 +62,7 @@ def nav_html(active_href, root):
         links.append(f'<a href="{root}{l["href"]}"{current}>{l["label"]}</a>')
     return f'''<header class="nav">
   <div class="wrap nav__in">
-    <a class="nav__brand" href="{root}index.html" aria-label="{site['brand_name']} home"><img src="{root}assets/brand/mark-glyph-small-gold.png" alt="" class="brand-mark"><span class="gothic">S&middot;C&middot;C&middot;C</span></a>
+    <a class="nav__brand" href="{root}index.html" aria-label="SCCC — home"><img src="{root}assets/brand/wordmark-a-gold.png" alt="SCCC"></a>
     <nav class="nav__links" aria-label="Primary">
       {''.join(links)}
     </nav>
@@ -77,6 +80,7 @@ def menu_html(active_href, root):
         current = ' aria-current="page"' if l["href"] == active_href else ""
         links.append(f'<a href="{root}{l["href"]}"{current}>{l["label"]}</a>')
     return f'''<nav class="menu" id="mobile-menu" aria-label="Mobile" aria-hidden="true">
+  <img class="menu__mark" src="{root}assets/brand/mark-glyph-gold.png" alt="">
   {''.join(links)}
   <div class="menu__meta"><span>SoCal, CA</span><span>Drop 001</span></div>
 </nav>'''
@@ -98,7 +102,7 @@ def footer_html(root, with_cta=False):
   <div class="wrap">
     {cta}
     <div class="foot__grid">
-      <div class="foot__brand"><span class="nav__brand"><img src="{root}assets/brand/mark-glyph-small-gold.png" alt="" class="brand-mark"><span class="gothic">S&middot;C&middot;C&middot;C</span></span><p>Built on Instinct. Defined by Discipline. Loyal for Life.</p></div>
+      <div class="foot__brand"><div class="nav__brand"><img src="{root}assets/brand/wordmark-a-gold.png" alt="SCCC"></div><p>Built on Instinct. Defined by Discipline. Loyal for Life.</p></div>
       <div class="foot__cols">
         {''.join(cols)}
       </div>
@@ -108,12 +112,14 @@ def footer_html(root, with_cta=False):
 </footer>'''
 
 
-def scripts_html(root, include_three=False):
+def scripts_html(root, include_three=False, include_world=False):
     three = f'<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>\n' if include_three else ""
+    world = f'<script src="{root}js/world.js"></script>\n' if include_world else ""
     return f'''<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
-{three}<script src="{root}js/site.js"></script>'''
+{three}<script src="{root}js/site.js"></script>
+{world}'''
 
 
 def preload_html(root, image_rel):
@@ -123,7 +129,7 @@ def preload_html(root, image_rel):
 
 
 def render_shell(page_key, content_html, root="", include_three=False,
-                  preload_image=None, jsonld="", with_footer_cta=False, active_href=None):
+                  preload_image=None, jsonld="", with_footer_cta=False, active_href=None, include_world=False):
     meta = site["pages"][page_key]
     canonical_abs = site["base_url"].rstrip("/") + meta["canonical"]
     og_image_abs = site["base_url"].rstrip("/") + "/" + meta["og_image"]
@@ -140,7 +146,7 @@ def render_shell(page_key, content_html, root="", include_three=False,
     html = html.replace("{{MENU}}", menu_html(active, root))
     html = html.replace("{{CONTENT}}", content_html)
     html = html.replace("{{FOOTER}}", footer_html(root, with_cta=with_footer_cta))
-    html = html.replace("{{SCRIPTS}}", scripts_html(root, include_three=include_three))
+    html = html.replace("{{SCRIPTS}}", scripts_html(root, include_three=include_three, include_world=include_world))
     return html
 
 
@@ -150,7 +156,12 @@ CARD_WIDTHS = [480, 800, 1300]
 
 
 def card_html(p, root, show_meta=False):
-    tag = '<span class="card__tag">New</span>' if p["is_new"] else ""
+    if p.get("photography_pending"):
+        tag = '<span class="card__tag" style="color:var(--muted);border-color:var(--line)">Coming Soon</span>'
+    elif p["is_new"]:
+        tag = '<span class="card__tag">New</span>'
+    else:
+        tag = ""
     meta = f'<p class="card__meta">{p["short_desc"]}</p>' if show_meta else ""
     w, h = image_size(f"assets/{p['image']}.jpg")
     base = f"{root}assets/{p['image']}"
@@ -215,7 +226,7 @@ def sizes_html(product):
 # ---------- build pages ----------
 def build_static_pages():
     plans = [
-        ("index", "index.html", dict(preload_image="assets/hero.jpg", include_three=True, with_footer_cta=True, jsonld=org_jsonld())),
+        ("index", "index.html", dict(include_three=True, include_world=True, with_footer_cta=True, jsonld=org_jsonld())),
         ("shop", "shop.html", dict()),
         ("lookbook", "lookbook.html", dict()),
         ("about", "about.html", dict(preload_image="assets/story.jpg", include_three=True)),
@@ -258,6 +269,15 @@ def build_product_pages():
         body = body.replace("{{IMG_HEIGHT}}", str(h))
         body = body.replace("{{SLUG}}", p["slug"])
         body = body.replace("{{CROSS_SELL_GRID}}", product_grid(others, "../", show_meta=False))
+        if p.get("photography_pending"):
+            body = body.replace(
+                f'<a class="btn btn--solid" data-magnetic data-reserve href="../contact.html?product={p["slug"]}"><span>Reserve this piece — ${p["price"]}</span></a>',
+                f'<a class="btn btn--solid" data-magnetic href="../contact.html?product={p["slug"]}&notify=1"><span>Notify me when available</span></a>'
+            )
+            body = body.replace(
+                '<picture><source srcset="../assets/story.webp" type="image/webp"><img src="../assets/story.jpg" alt="SCCC campaign editorial" loading="lazy" width="1800" height="1200"></picture>',
+                ''
+            )
 
         page_key_meta = {
             "title": f"{p['name']} — SCCC",
