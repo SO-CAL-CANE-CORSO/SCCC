@@ -59,7 +59,7 @@ def nav_html(active_href, root):
         links.append(f'<a href="{root}{l["href"]}"{current}>{l["label"]}</a>')
     return f'''<header class="nav">
   <div class="wrap nav__in">
-    <a class="nav__brand" href="{root}index.html" aria-label="{site['brand_name']} home">{site['brand_name']}</a>
+    <a class="nav__brand" href="{root}index.html" aria-label="{site['brand_name']} home"><img src="{root}assets/brand/mark-glyph-small-gold.png" alt="" class="brand-mark"><span class="gothic">S&middot;C&middot;C&middot;C</span></a>
     <nav class="nav__links" aria-label="Primary">
       {''.join(links)}
     </nav>
@@ -98,12 +98,12 @@ def footer_html(root, with_cta=False):
   <div class="wrap">
     {cta}
     <div class="foot__grid">
-      <div class="foot__brand"><span class="nav__brand">{site['brand_name']}</span><p>{site['tagline']}</p></div>
+      <div class="foot__brand"><span class="nav__brand"><img src="{root}assets/brand/mark-glyph-small-gold.png" alt="" class="brand-mark"><span class="gothic">S&middot;C&middot;C&middot;C</span></span><p>Built on Instinct. Defined by Discipline. Loyal for Life.</p></div>
       <div class="foot__cols">
         {''.join(cols)}
       </div>
     </div>
-    <div class="foot__bottom"><span>&copy; {YEAR} {site['brand_name']} — {site['brand_full']}.</span><span>Built for the Loyal.</span></div>
+    <div class="foot__bottom"><span class="tricolor"><span></span><span></span><span></span></span><span>&copy; {YEAR} {site['brand_name']} &mdash; Est. MMXX</span><span>Built on Instinct. Loyal for Life.</span></div>
   </div>
 </footer>'''
 
@@ -225,9 +225,12 @@ def build_static_pages():
         content = (SRC / "content" / content_file).read_text()
         if "{{PRODUCT_GRID_HOME}}" in content:
             content = content.replace("{{PRODUCT_GRID_HOME}}", product_grid(products_data["featured_home"], "", show_meta=False))
-        if "{{PRODUCT_GRID_SHOP}}" in content:
-            all_slugs = [p["slug"] for p in PRODUCTS]
-            content = content.replace("{{PRODUCT_GRID_SHOP}}", product_grid(all_slugs, "", show_meta=True))
+        if "{{PRODUCT_GRID_APPAREL}}" in content:
+            apparel_slugs = [p["slug"] for p in PRODUCTS if p["category"] in ("apparel", "headwear")]
+            content = content.replace("{{PRODUCT_GRID_APPAREL}}", product_grid(apparel_slugs, "", show_meta=True))
+        if "{{PRODUCT_GRID_DOGGEAR}}" in content:
+            doggear_slugs = [p["slug"] for p in PRODUCTS if p["category"] == "dog-gear"]
+            content = content.replace("{{PRODUCT_GRID_DOGGEAR}}", product_grid(doggear_slugs, "", show_meta=True))
         if content_file == "contact.html":
             action = f"https://formspree.io/f/{site['formspree_id']}"
             content = content.replace("{{FORMSPREE_ACTION}}", action)

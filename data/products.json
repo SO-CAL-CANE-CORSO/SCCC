@@ -83,6 +83,20 @@
       "sizes": ["XS", "S", "M", "L", "XL"],
       "default_size": "M",
       "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    },
+    {
+      "slug": "tactical-harness",
+      "name": "SCCC Tactical Harness",
+      "price": 95,
+      "is_new": true,
+      "category": "dog-gear",
+      "image": "product-tactical-harness",
+      "short_desc": "Structured utility harness",
+      "desc": "A structured tactical harness built for the guardian breed. Weather-shell construction, embroidered chest crest, hardware rated for real work.",
+      "details": "Weather-resistant shell over padded core. Embroidered SCCC chest crest panel. D-ring hardware, adjustable straps, tricolor edge stitching.",
+      "sizes": ["S", "M", "L", "XL"],
+      "default_size": "M",
+      "care": "Wipe clean with a damp cloth. Air dry. Do not machine wash."
     }
   ],
   "featured_home": ["guardian-hoodie", "corso-crewneck", "legacy-jacket"],
