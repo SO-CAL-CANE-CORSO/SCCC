@@ -1,0 +1,62 @@
+{
+  "base_url": "https://sccc-socal.vercel.app",
+  "brand_name": "SCCC",
+  "brand_full": "SoCal Cane Corso",
+  "tagline": "SoCal Cane Corso. Heavyweight streetwear, built for the loyal.",
+  "formspree_id": "REPLACE_WITH_FORMSPREE_ID",
+  "nav_links": [
+    { "label": "Home", "href": "index.html" },
+    { "label": "Shop", "href": "shop.html" },
+    { "label": "Lookbook", "href": "lookbook.html" },
+    { "label": "The Bloodline", "href": "about.html" },
+    { "label": "Contact", "href": "contact.html" }
+  ],
+  "footer_cols": [
+    {
+      "title": "Shop",
+      "links": [
+        { "label": "Drop 001", "href": "shop.html" },
+        { "label": "Lookbook", "href": "lookbook.html" }
+      ]
+    },
+    {
+      "title": "Brand",
+      "links": [
+        { "label": "The Bloodline", "href": "about.html" },
+        { "label": "Contact", "href": "contact.html" }
+      ]
+    }
+  ],
+  "pages": {
+    "index": {
+      "title": "SCCC \u2014 SoCal Cane Corso",
+      "description": "SoCal Cane Corso \u2014 heavyweight streetwear built for the loyal. Drop 001.",
+      "canonical": "/",
+      "og_image": "assets/hero.jpg"
+    },
+    "shop": {
+      "title": "Shop \u2014 SCCC Drop 001",
+      "description": "Shop SCCC Drop 001 \u2014 heavyweight streetwear built for the loyal.",
+      "canonical": "/shop",
+      "og_image": "assets/hero.jpg"
+    },
+    "lookbook": {
+      "title": "Lookbook \u2014 SCCC Drop 001",
+      "description": "SCCC Drop 001 lookbook \u2014 editorial imagery.",
+      "canonical": "/lookbook",
+      "og_image": "assets/story.jpg"
+    },
+    "about": {
+      "title": "The Bloodline \u2014 SCCC",
+      "description": "The Bloodline \u2014 the story behind SoCal Cane Corso.",
+      "canonical": "/about",
+      "og_image": "assets/story.jpg"
+    },
+    "contact": {
+      "title": "Contact \u2014 SCCC",
+      "description": "Get in touch with SCCC \u2014 SoCal Cane Corso. Join the bloodline.",
+      "canonical": "/contact",
+      "og_image": "assets/hero.jpg"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "products": [
+    {
+      "slug": "alpha-tee",
+      "name": "Alpha Tee",
+      "price": 45,
+      "is_new": true,
+      "category": "apparel",
+      "image": "product-alpha-tee",
+      "short_desc": "Heavyweight cotton tee",
+      "desc": "The everyday standard. Boxy, heavyweight, and built to outlast a season of wear.",
+      "details": "220gsm heavyweight cotton. Boxy fit, dropped shoulder. Garment-washed for a lived-in feel from day one.",
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "default_size": "M",
+      "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    },
+    {
+      "slug": "guardian-hoodie",
+      "name": "Guardian Hoodie",
+      "price": 85,
+      "is_new": true,
+      "category": "apparel",
+      "image": "product-guardian-hoodie",
+      "short_desc": "Structured heavyweight hoodie",
+      "desc": "A structured heavyweight hoodie built to stand guard. Brushed interior, boxed fit, and hardware that holds. The cornerstone of the drop.",
+      "details": "380gsm heavyweight cotton fleece. Ribbed cuffs and hem. Embroidered SCCC mark. Relaxed, boxed fit \u2014 size down for a trimmer look.",
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "default_size": "S",
+      "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    },
+    {
+      "slug": "pack-leader-tee",
+      "name": "Pack Leader Tee",
+      "price": 45,
+      "is_new": false,
+      "category": "apparel",
+      "image": "product-pack-leader-tee",
+      "short_desc": "Graphic heavyweight tee",
+      "desc": "Front-and-back graphic on the same heavyweight build. Made for the one who leads the pack.",
+      "details": "220gsm heavyweight cotton. Boxy fit. Front and back screen print. Garment-washed, true to size.",
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "default_size": "M",
+      "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    },
+    {
+      "slug": "sccc-cap",
+      "name": "SCCC Cap",
+      "price": 35,
+      "is_new": false,
+      "category": "headwear",
+      "image": "product-sccc-cap",
+      "short_desc": "Structured logo cap",
+      "desc": "A structured 6-panel cap that finishes the fit. Embroidered mark, adjustable strap.",
+      "details": "Structured 6-panel construction. Embroidered SCCC wordmark. Adjustable strap, curved brim.",
+      "sizes": ["One Size"],
+      "default_size": "One Size",
+      "care": "Spot clean only. Do not machine wash."
+    },
+    {
+      "slug": "corso-crewneck",
+      "name": "Corso Crewneck",
+      "price": 70,
+      "is_new": false,
+      "category": "apparel",
+      "image": "product-corso-crewneck",
+      "short_desc": "Premium fleece crewneck",
+      "desc": "Premium fleece crewneck cut for movement, not restriction. Ribbed collar and hem hold their shape drop after drop.",
+      "details": "400gsm premium cotton fleece. Dropped shoulder, ribbed collar and hem. Embroidered Corso mark on chest. Relaxed fit \u2014 true to size.",
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "default_size": "M",
+      "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    },
+    {
+      "slug": "legacy-jacket",
+      "name": "Legacy Jacket",
+      "price": 120,
+      "is_new": true,
+      "category": "apparel",
+      "image": "product-legacy-jacket",
+      "short_desc": "Statement outerwear",
+      "desc": "Heavyweight shell built to be handed down. Structured collar, snap placket, and a fit that holds its line.",
+      "details": "Heavyweight quilted-lined shell. Snap placket, structured collar, interior pocket. True to size.",
+      "sizes": ["XS", "S", "M", "L", "XL"],
+      "default_size": "M",
+      "care": "Machine wash cold, inside out. Tumble dry low. Do not iron print."
+    }
+  ],
+  "featured_home": ["guardian-hoodie", "corso-crewneck", "legacy-jacket"],
+  "shipping_returns": "Complimentary shipping over $150. 30-day returns on unworn items with tags."
+}

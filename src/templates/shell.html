@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}" />
+<link rel="canonical" href="{{CANONICAL}}" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{TITLE}}" />
+<meta property="og:description" content="{{DESCRIPTION}}" />
+<meta property="og:image" content="{{OG_IMAGE_ABS}}" />
+<meta property="og:url" content="{{CANONICAL}}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{TITLE}}" />
+<meta name="twitter:description" content="{{DESCRIPTION}}" />
+<meta name="twitter:image" content="{{OG_IMAGE_ABS}}" />
+<link rel="icon" href="{{ROOT}}favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="{{ROOT}}assets/favicon-180.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+{{PRELOAD}}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500&display=swap" />
+<link rel="stylesheet" href="{{ROOT}}css/site.css" />
+{{JSONLD}}
+</head>
+<body class="loading">
+<a class="skip" href="#main">Skip to content</a>
+<div class="loader"><div class="loader__mark">SCCC</div><div class="loader__bar"></div><div class="loader__num">000</div></div>
+<div class="pt"></div>
+{{NAV}}
+{{MENU}}
+<main id="main">
+{{CONTENT}}
+</main>
+{{FOOTER}}
+{{SCRIPTS}}
+</body>
+</html>
