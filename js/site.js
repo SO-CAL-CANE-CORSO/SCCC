@@ -22,6 +22,16 @@
   function initLoader() {
     var loader = doc.querySelector(".loader");
     if (!loader) { start(); return; }
+    var seen = false;
+    try { seen = sessionStorage.getItem("sccc_intro_seen") === "1"; } catch (e) {}
+    if (seen) {
+      doc.body.classList.remove("loading");
+      loader.style.display = "none";
+      if (loader.parentNode) loader.parentNode.removeChild(loader);
+      start();
+      return;
+    }
+    try { sessionStorage.setItem("sccc_intro_seen", "1"); } catch (e) {}
     doc.body.classList.add("loading");
     window.setTimeout(function(){ if (doc.body.classList.contains("loading")) { doc.body.classList.remove("loading"); if (loader) loader.style.display = "none"; start(); } }, 2400);
     var bar = loader.querySelector(".loader__bar");
@@ -83,22 +93,11 @@
 
   /* ---------- Page transition ---------- */
   function initTransitions() {
+    /* Native navigation — no overlay popup between pages. */
     var pt = doc.querySelector(".pt");
-    if (hasGSAP && !reduce && pt) gsap.set(pt, { yPercent: 100 });
-    doc.querySelectorAll('a[href]').forEach(function(a){
-      var href = a.getAttribute("href");
-      if (!href || href.charAt(0)==="#" || a.target==="_blank" || href.indexOf("http")===0 || href.indexOf("mailto")===0) return;
-      a.addEventListener("click", function(e){
-        if (!hasGSAP || reduce || !pt) return;
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-        e.preventDefault();
-        gsap.timeline()
-          .set(pt,{yPercent:100})
-          .to(pt,{yPercent:0,duration:.6,ease:"expo.inOut"})
-          .add(function(){ window.location.href = href; });
-      });
-    });
+    if (pt && pt.parentNode) pt.parentNode.removeChild(pt);
   }
+
 
   /* ---------- Reveal + scroll animations ---------- */
   function initReveals() {

@@ -332,3 +332,112 @@ body.loading{overflow:auto!important}
 body:not(.loading) .loader{opacity:0;visibility:hidden;pointer-events:none}
 @media(max-width:720px){.nav{background:rgba(5,5,5,.82);backdrop-filter:blur(14px)}.nav__in{gap:12px}.hero__in{padding-inline:22px}}
 
+
+
+/* ============================================================
+   SCCC — ELEGANCE REWRITE : "Italian guardian house"
+   Editorial + heritage + tailored. Depth over flatness.
+   Appended last so it governs the cascade.
+   ============================================================ */
+:root{
+  --hair:rgba(251,176,59,.22);        /* gold hairline */
+  --hair-soft:rgba(244,240,232,.09);
+  --shadow-1:0 1px 0 rgba(255,255,255,.03), 0 24px 60px -28px rgba(0,0,0,.85);
+  --shadow-2:0 40px 120px -40px rgba(0,0,0,.9);
+  --ink-grad:linear-gradient(180deg,#070707 0%,#0b0b0d 55%,#070707 100%);
+}
+
+/* ---- global depth: kill the flat black, add cinematic falloff ---- */
+body{background:var(--ink-grad);background-attachment:fixed}
+main{position:relative}
+
+/* subtle top hairline + breathing room on every major section */
+section{position:relative}
+section + section::before{
+  content:"";position:absolute;left:var(--gutter);right:var(--gutter);top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--hair) 18%,var(--hair) 82%,transparent);
+  opacity:.6;pointer-events:none;
+}
+
+/* ---- typographic detail: gold hairline flourish under eyebrows ---- */
+.eyebrow{display:inline-flex;align-items:center;gap:12px}
+.eyebrow::before{content:"";width:26px;height:1px;background:var(--gold);opacity:.9;display:inline-block}
+.sec--cream .eyebrow::before{background:var(--gold-deep)}
+
+/* tighten + refine display type so it reads tailored, not shouty-flat */
+h1,h2,h3{letter-spacing:.005em}
+.h-hero{letter-spacing:-.005em;text-shadow:0 40px 90px rgba(0,0,0,.55)}
+.lead{line-height:1.72;color:#d5d0c4}
+
+/* ---- tailored pinstripe cue on cream sections (Italian suiting) ---- */
+.sec--cream{
+  background:
+    repeating-linear-gradient(90deg, rgba(20,18,16,.035) 0 1px, transparent 1px 7px),
+    var(--cream);
+  box-shadow:inset 0 1px 0 rgba(0,0,0,.06), inset 0 -1px 0 rgba(0,0,0,.06);
+}
+
+/* ============ SHOP CARDS — the headline fix ============ */
+/* remove the muddy darkening filter so the studio mockups read clean & premium */
+.card__media img{filter:none!important;transition:transform 1.1s var(--ease),filter .5s var(--ease)!important}
+.card__media{
+  aspect-ratio:4/5;background:#e9e4d8;               /* light plinth so studio shots sit in a gallery frame */
+  border:1px solid var(--hair-soft);border-radius:2px;overflow:hidden;position:relative;
+  box-shadow:var(--shadow-1);
+}
+.card{transition:transform .6s var(--ease)}
+.card:hover{transform:translateY(-6px)}
+.card:hover .card__media{box-shadow:var(--shadow-2);border-color:var(--hair)}
+.card:hover .card__media img{transform:scale(1.045)}
+/* elegant gold frame reveal on hover */
+.card__media::after{content:"";position:absolute;inset:8px;border:1px solid transparent;border-radius:1px;transition:border-color .5s var(--ease);pointer-events:none;z-index:2}
+.card:hover .card__media::after{border-color:rgba(251,176,59,.55)}
+/* refined tag + cta chips */
+.card__tag{position:absolute;top:12px;left:12px;z-index:3;font-family:var(--sans);font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#0b0b0d;background:var(--gold);padding:6px 10px;border-radius:1px}
+.card__cta{position:absolute;left:0;right:0;bottom:0;z-index:3;text-align:center;padding:16px;font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:#0b0b0d;background:linear-gradient(180deg,transparent,rgba(233,228,216,.92) 40%);opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.card:hover .card__cta{opacity:1;transform:translateY(0)}
+/* product name row: refined hierarchy */
+.card__row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;margin-top:18px}
+.card__name{font-family:var(--sans);font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:var(--white)}
+.card__price{font-family:var(--sans);font-weight:600;font-size:14px;color:var(--gold)}
+.card__meta{font-family:var(--body);font-size:13px;color:var(--muted);margin-top:6px;letter-spacing:.01em}
+/* subtle gold baseline that grows under a card on hover */
+.card__row{position:relative;padding-bottom:14px}
+.card__row::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:var(--gold);transition:width .6s var(--ease)}
+.card:hover .card__row::after{width:100%}
+
+/* ============ FOOTER — mascot gets an intentional home ============ */
+.foot{position:relative;overflow:hidden;border-top:1px solid var(--hair);background:linear-gradient(180deg,#080808,#050505)}
+/* large embossed gold mascot glyph, dignified & faint, behind content */
+.foot::before{
+  content:"";position:absolute;right:-4%;bottom:-14%;width:min(58vw,560px);height:min(58vw,560px);
+  background:url(../assets/brand/mark-glyph-gold.png) center/contain no-repeat;
+  opacity:.06;filter:grayscale(.2);pointer-events:none;z-index:0;
+}
+.foot .wrap{position:relative;z-index:1}
+.foot__brand p{color:var(--muted);max-width:34ch;margin-top:14px;line-height:1.7}
+.foot__col h4{font-family:var(--sans);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.foot__col a{display:block;color:var(--mist);padding:5px 0;font-size:14px;transition:color .3s,padding-left .3s var(--ease)}
+.foot__col a:hover{color:var(--white);padding-left:6px}
+.foot__bottom{border-top:1px solid var(--hair-soft);margin-top:56px;padding-top:26px;display:flex;flex-wrap:wrap;align-items:center;gap:16px;justify-content:space-between;font-family:var(--sans);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+/* ---- nav: crisper, more couture ---- */
+.nav__brand .gothic{color:var(--gold)}
+.nav.scrolled{background:rgba(6,6,7,.82)}
+
+/* ---- buttons: a touch more refined ---- */
+.btn{border-radius:1px}
+.btn--solid{box-shadow:0 14px 40px -18px rgba(251,176,59,.5)}
+
+/* ---- images render clean everywhere (undo any legacy darkening) ---- */
+.reveal img,.media img,figure img{filter:none}
+
+/* ---- section rhythm: more generous, editorial whitespace (scoped: never the nav) ---- */
+main section > .wrap{padding-block:clamp(64px,9vw,132px)}
+.foot > .wrap{padding-block:clamp(72px,10vw,150px)}
+.nav > .wrap,.nav .wrap{padding-block:0}
+
+/* ---- reduce-motion respect ---- */
+@media(prefers-reduced-motion:reduce){
+  .card,.card__media img,.card__cta,.card__row::after{transition:none!important}
+}
