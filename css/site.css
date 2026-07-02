@@ -441,3 +441,97 @@ main section > .wrap{padding-block:clamp(64px,9vw,132px)}
 @media(prefers-reduced-motion:reduce){
   .card,.card__media img,.card__cta,.card__row::after{transition:none!important}
 }
+
+
+/* ============================================================
+   SCCC — SULLEN INK COLLECTIVE layer
+   Tattoo-art collective energy: ink-black, ornamental,
+   crimson + gold, blackletter accents, "wear the art".
+   Appended last — governs the cascade.
+   ============================================================ */
+:root{
+  --crimson:#a51b22;          /* Sullen-style oxblood crimson */
+  --crimson-bright:#c8232b;
+  --ink:#040404;
+  --bone:#ece6da;
+}
+
+/* deeper ink base + faint ornamental tattoo-flash wallpaper */
+body{
+  background:
+    radial-gradient(120% 80% at 50% -10%, rgba(165,27,34,.10), transparent 60%),
+    var(--ink);
+  background-attachment:fixed;
+}
+main::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:url(../assets/brand/pattern-tile-gold.png) center/460px repeat;
+  opacity:.035;mix-blend-mode:screen;
+}
+main > *{position:relative;z-index:1}
+
+/* ---- HERO: the mascot becomes the art ---- */
+.hero{position:relative;overflow:hidden}
+.hero__mascot{
+  position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);
+  width:min(74vh,660px);height:auto;z-index:0;
+  opacity:.14;filter:drop-shadow(0 40px 90px rgba(0,0,0,.6));
+  animation:mascotBreath 9s var(--ease-soft) infinite;
+  pointer-events:none;
+}
+@keyframes mascotBreath{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.03)}}
+.hero__in{position:relative;z-index:2}
+.hero__title{mix-blend-mode:normal}
+/* thin crimson rule under the hero eyebrow for the collective mark */
+.hero__eyebrow .eyebrow::before{background:var(--crimson-bright)}
+@media(prefers-reduced-motion:reduce){.hero__mascot{animation:none}}
+
+/* ---- ETHOS: ornamental glyph crowns the statement ---- */
+.ethos__mark{width:64px;height:auto;margin:0 auto 26px;opacity:.9;display:block;
+  filter:drop-shadow(0 6px 20px rgba(165,27,34,.35))}
+
+/* ---- crimson enters the accent system beside gold ---- */
+::selection{background:var(--crimson);color:var(--bone)}
+.btn--gold{background:var(--gold)}
+.btn--solid::after{background:var(--crimson-bright)}
+.card__tag{background:var(--crimson-bright);color:var(--bone)}
+.sec__head h2 span,.h2 span{position:relative}
+
+/* ---- SHOP / COLLECTION as an art gallery of plates ---- */
+.card__media{background:#0c0b0b;border:1px solid rgba(236,230,218,.10)}
+/* ornamental double-frame like a tattoo flash plate */
+.card__media::before{
+  content:"";position:absolute;inset:10px;border:1px solid rgba(251,176,59,.14);
+  z-index:2;pointer-events:none;transition:border-color .5s var(--ease);
+}
+.card:hover .card__media::before{border-color:rgba(200,35,43,.6)}
+.card:hover .card__media::after{border-color:rgba(251,176,59,.7)}
+.card__price{color:var(--gold)}
+.card__name{color:var(--bone)}
+
+/* ---- blackletter accents for the collective voice ---- */
+.sec__head .eyebrow,.foot__col h4{color:var(--gold)}
+.story__index{color:var(--crimson-bright);font-family:var(--sans);letter-spacing:.24em;font-weight:700}
+
+/* ---- section hairlines shift to a tattooed gold+crimson stitch ---- */
+main section + section::before{
+  background:linear-gradient(90deg,transparent,rgba(200,35,43,.5) 30%,rgba(251,176,59,.5) 70%,transparent);
+}
+
+/* ---- footer: mascot watermark warms toward the ink-collective feel ---- */
+.foot{border-top:1px solid rgba(200,35,43,.35)}
+.foot::before{opacity:.07}
+.foot__bottom .tricolor{filter:saturate(1.1)}
+
+/* ---- nav brand keeps its gold blackletter but tightens ---- */
+.nav__brand .gothic{color:var(--gold);text-shadow:0 2px 14px rgba(165,27,34,.4)}
+
+/* ---- story panels: deepen the cinematic tattoo-editorial mood ---- */
+.story__bg{filter:grayscale(.15) contrast(1.05) brightness(.72)}
+.story__panel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,4,4,.2),rgba(4,4,4,.72));pointer-events:none}
+
+/* ---- lookbook items: framed art plates ---- */
+.look__item{position:relative;border:1px solid rgba(236,230,218,.08)}
+.look__item img{filter:grayscale(.1) contrast(1.04) brightness(.9);transition:filter .6s var(--ease),transform .9s var(--ease)}
+.look__item:hover img{filter:none;transform:scale(1.03)}
+.look__cap{color:var(--bone)}
